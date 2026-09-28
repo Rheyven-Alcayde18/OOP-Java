@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OOP Midterm Practice Test</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f6f5f1;--card:#fff;--tx:#1d1d1b;--mut:#6b6b66;--ac:#2b59c3;--ok:#1e8e4e;--bad:#c93a3a;--bd:#dcdad2}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17181b;--card:#222429;--tx:#eceae4;--mut:#9a9a94;--ac:#7ea3ff;--ok:#4cc27f;--bad:#ff7a7a;--bd:#363940}}
+:root[data-theme="dark"]{--bg:#17181b;--card:#222429;--tx:#eceae4;--mut:#9a9a94;--ac:#7ea3ff;--ok:#4cc27f;--bad:#ff7a7a;--bd:#363940}
+*{box-sizing:border-box}html{scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.w{max-width:760px;margin:0 auto;padding:16px}
+h1{font-size:1.4rem;margin:8px 0}
+.sub{color:var(--mut);font-size:.9rem;margin-bottom:12px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:5;border-bottom:1px solid var(--bd)}
+.pb{height:6px;background:var(--bd);border-radius:3px;overflow:hidden}.pb i{display:block;height:100%;width:0;background:var(--ac);transition:width .2s}
+.bar small{color:var(--mut)}
+.info{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+input[type=text]{flex:1;min-width:160px;padding:9px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font:inherit}
+h2{font-size:1.05rem;margin:26px 0 8px;color:var(--ac)}
+.q{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;margin:10px 0}
+.q.ok{border-color:var(--ok)}.q.no{border-color:var(--bad)}
+.qt{font-weight:600}.hint{font-size:.8rem;color:var(--mut);margin:2px 0 6px}
+pre{background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:10px;overflow-x:auto;font:13px/1.45 ui-monospace,Menlo,Consolas,monospace;margin:8px 0}
+label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--bd);border-radius:8px;margin:6px 0;cursor:pointer}
+label:hover{border-color:var(--ac)}
+label input{margin-top:4px;flex:none}
+label.c{background:color-mix(in srgb,var(--ok) 18%,transparent);border-color:var(--ok)}
+label.w{background:color-mix(in srgb,var(--bad) 18%,transparent);border-color:var(--bad)}
+button{font:inherit;padding:11px 20px;border:0;border-radius:10px;background:var(--ac);color:#fff;cursor:pointer;font-weight:600}
+button.g{background:transparent;color:var(--ac);border:1px solid var(--ac)}
+.res{background:var(--card);border:2px solid var(--ac);border-radius:12px;padding:16px;margin:14px 0;display:none}
+.res b{font-size:1.6rem}
+.acts{display:flex;gap:10px;margin:18px 0 40px;flex-wrap:wrap}
+</style></head><body>
+<div class="w">
+<h1>Midterm Exam Practice Test</h1>
+<div class="sub">Difficulty: Difficult · Weeks 1–10 · OOP in Java · 50 items, 1 point each. For "select TWO" items, pick all correct answers (all-or-nothing).</div>
+<div class="info"><input type="text" id="nm" placeholder="Name"><input type="text" id="sc" placeholder="Section"></div>
+<div class="bar"><div class="pb"><i id="pg"></i></div><small id="pt">0 / 50 answered</small></div>
+<div class="res" id="res"></div>
+<div id="qs"></div>
+<div class="acts"><button id="sub">Submit answers</button><button class="g" id="rst">Reset</button></div>
+</div>
+<script>
+const P=["PART I – OOP Fundamentals (Weeks 1–3)","PART II – Classes, Objects, Constructors and Methods (Weeks 2–5)","PART III – this, User Input and Encapsulation (Weeks 4–6)","PART IV – Validation, Overloading and Inheritance (Weeks 7–8)","PART V – Method Overriding and Code Analysis (Weeks 9–10)"];
+// [question, options, answer index or array (multi), code]
+const Q=[
+["A payroll system groups employee data with methods that calculate salary and validate updates. Which programming paradigm is MOST directly represented?",["Procedural programming","Object-oriented programming","Assembly programming","Markup programming"],1],
+["Which TWO are core characteristics of object-oriented programming?",["Encapsulation","Inheritance","Compilation","Source-code formatting"],[0,1]],
+["A developer defines Student with fields, constructors, and methods, then creates several Student variables using new. What role does Student play in this design?",["A blueprint for creating objects","A running program","A database table","A compiler command"],0],
+["Two Student objects are created from the same Student class and receive different names. Which explanation BEST accounts for their different states?",["An instance of a class","A Java keyword","A package","A source file"],0],
+["Which expression actually causes Java to instantiate an object rather than merely declare a reference?",["new","class","void","static"],0],
+["Which TWO statements correctly describe a constructor?",["It is used to initialize a newly created object.","Its name normally matches the class name.","It must always return a value.","It can be declared with the return type void."],[0,1]],
+["Which method signature is recognized as the entry point of a conventional standalone Java application?",["start()","main()","run()","execute()"],1],
+["Which paradigm focuses mainly on procedures or functions that operate on data?",["Object-oriented","Procedural","Event-only","Markup"],1],
+["Which declaration both declares a Student reference and initializes it with a newly created object?",["Student student = new Student();","new Student = student;","Student = new student();","student Student();"],0],
+["Which TWO can be members of a Java class?",["Fields","Methods","Only comments","Only import statements"],[0,1]],
+["Given Car c1 = new Car(); and Car c2 = new Car(); which statement correctly describes c1 and c2?",["Car","myCar","class Car","new"],1],
+["Which statement creates an object using a no-argument constructor?",["Car c = new Car();","Car c = Car();","new c = Car();","Car.new c();"],0],
+["Which TWO statements about an instance variable are correct?",["It is associated with an object.","Different objects can have different values for it.","It must always be static.","It can only be declared inside main()."],[0,1]],
+["A constructor executes immediately as an object is created. Which responsibility BEST describes that constructor's role?",["Initialize a newly created object","Print every method","Destroy an object","Import a package"],0],
+["A Book class supports new Book(), new Book(\"Java\"), and new Book(\"Java\", 500). Which Java feature makes these calls possible?",["Constructor overloading","Inheritance","Encapsulation","Abstraction"],0],
+["In Account(String owner), both the parameter and field are named owner. Which expression unambiguously refers to the current object's field?",["this","super","self","current"],0],
+["Which TWO statements correctly describe a method?",["It is a block of code that performs a task.","It can accept parameters.","It must always be a constructor.","It cannot return a value."],[0,1]],
+["A method calculates a discounted price and the caller stores the result in double finalPrice. Which method declaration is MOST appropriate?",["A method with a return type","Only void methods","Only constructors","Only static variables"],0],
+["If Student s = new Student(); and display() is an instance method, which statement correctly invokes the method on that particular object?",["s.display();","display.s();","s->display();","call s.display();"],0],
+["Which TWO are valid reasons for using parameters in methods?",["They allow data to be passed into a method.","They allow the same method to work with different input values.","They automatically create a new class.","They replace every constructor."],[0,1]],
+["In a method setName(String name), what does this.name refer to when both identifiers have the same spelling?",["The name field of the current object","A field of the parent class","A new object named name","A static field in every class"],0],
+["Which TWO are appropriate uses of the this keyword?",["Refer to the current object.","Distinguish an instance field from a parameter with the same name.","Call a method in a completely unrelated class without an object.","Replace the class declaration."],[0,1]],
+["A program must read an integer age and a String name from keyboard input. Which Java class is the course example intended for this task?",["Scanner","ConsoleReader","Keyboard","InputBox"],0],
+["Which statement correctly creates a Scanner for keyboard input?",["Scanner sc = new Scanner(System.in);","Scanner sc = Scanner(System.out);","new Scanner = System.in;","Scanner(System.in) = sc;"],0],
+["Which TWO steps are commonly involved when a program accepts user input and creates an object?",["Read input values.","Pass input values to a constructor or setter.","Delete the class before creating the object.","Replace all methods with comments."],[0,1]],
+["A Student class makes age private and exposes setAge() with validation. Which OOP principle is being applied, and what is its purpose?",["Control access to an object’s data and bundle data with behavior","Make every field public","Prevent objects from being created","Replace Java classes with functions"],0],
+["A field must not be directly accessible from unrelated classes but must remain accessible to methods inside its declaring class. Which modifier best fits?",["private","public","protected","static"],0],
+["Which TWO practices support encapsulation?",["Declare data fields private.","Provide controlled access through methods such as getters and setters.","Make every field public.","Allow unrelated classes to modify private fields directly."],[0,1]],
+["A private balance field must be readable by other code without exposing the field directly. Which method design addresses this requirement?",["Retrieving the value of a private field","Deleting an object","Creating a package","Overriding a constructor"],0],
+["A private age field must accept updates only when the value satisfies a rule. Which method is most appropriate?",["Changing the value of a private field in a controlled way","Starting the Java compiler","Creating an interface automatically","Calling the superclass constructor only"],0],
+["Which TWO are good reasons to validate data in a setter?",["To prevent invalid values from being stored.","To enforce rules on an object’s state.","To make every value automatically valid.","To remove the need for constructors."],[0,1]],
+["Consider the code below. What happens when setAge(-5) is called?",["The age field is not changed by the assignment.","The age field becomes -5.","The program always creates a new object.","The class is automatically deleted."],0,"public void setAge(int age) {\n  if (age >= 0) this.age = age;\n}"],
+["A class defines constructors with zero, one, and two parameters. Which statement correctly identifies the language feature involved?",["Having multiple constructors with different parameter lists","Having multiple classes with the same name","Changing a constructor into a getter","Calling the superclass method automatically"],0],
+["Which TWO constructor declarations are overloaded versions of the same class constructor?",["Student()","Student(String name)","getStudent()","void Student(int age)"],[0,1]],
+["A subclass constructor must invoke a parameterized constructor in its parent class. Which keyword is required?",["super","this","extends","parent"],0],
+["Which declaration correctly expresses that Dog is a specialized form of Animal?",["extends","implements","inherits","super"],0],
+["Which TWO statements about inheritance are correct?",["A subclass can inherit accessible members from a superclass.","A subclass can add its own fields and methods.","A subclass must copy every line of the superclass.","Inheritance requires all fields to be public."],[0,1]],
+["In a subclass constructor, what is the effect of explicitly writing super() as the first constructor statement?",["Calls the superclass constructor","Creates a second subclass","Calls the current constructor recursively","Makes all fields private"],0],
+["If Dog extends Animal and Animal defines eat(), which conclusion is consistent with the course's inheritance model?",["Dog is a subclass of Animal.","Animal is a subclass of Dog.","Dog and Animal cannot have methods.","extends creates an interface."],0],
+["Which TWO are common benefits of inheritance?",["Code reuse through a superclass","Specialization of a general class through subclasses","Elimination of all constructors","Making every field public"],[0,1]],
+["Animal defines sound(), and Dog defines sound() with the same signature and a different body. Which OOP mechanism is demonstrated?",["A subclass provides its own implementation of an inherited method with the same signature","A class has two constructors","A method is called twice","A private field is renamed"],0],
+["Which TWO statements about @Override are correct?",["It indicates that a subclass method is intended to override a superclass method.","The compiler can help detect a mismatch when the method does not actually override a superclass method.","It creates a new object automatically.","It replaces the extends keyword."],[0,1]],
+["CODE ANALYSIS: Trace constructor calls, field assignment, and dynamic method selection. What is printed by this program?",["Animal","Dog","sound()","No output"],1,"class Animal {\n  void sound() { System.out.println(\"Animal\"); }\n}\nclass Dog extends Animal {\n  @Override\n  void sound() { System.out.println(\"Dog\"); }\n}\npublic class Main {\n  public static void main(String[] args) {\n    Dog d = new Dog();\n    d.sound();\n  }\n}"],
+["CODE ANALYSIS: What is the output?",["Student then Person","Person then Student","Student only","Person only"],1,"class Person {\n  Person() { System.out.println(\"Person\"); }\n}\nclass Student extends Person {\n  Student() {\n    super();\n    System.out.println(\"Student\");\n  }\n}\npublic class Main {\n  public static void main(String[] args) {\n    new Student();\n  }\n}"],
+["CODE ANALYSIS: Which TWO statements correctly describe the result of this code?",["a.value is 10.","b.value is 25.","a.value is 25.","b.value is 10."],[0,1],"class Box {\n  int value;\n  Box() { value = 10; }\n  Box(int value) { this.value = value; }\n}\npublic class Main {\n  public static void main(String[] args) {\n    Box a = new Box();\n    Box b = new Box(25);\n    System.out.println(a.value);\n    System.out.println(b.value);\n  }\n}"],
+["CODE ANALYSIS: What is printed?",["Child then Parent","Parent then Child","Parent only","Child only"],1,"class Parent {\n  String name = \"Parent\";\n}\nclass Child extends Parent {\n  String name = \"Child\";\n  void show() {\n    System.out.println(super.name);\n    System.out.println(this.name);\n  }\n}\npublic class Main {\n  public static void main(String[] args) {\n    new Child().show();\n  }\n}"],
+["CODE ANALYSIS: What is printed?",["Animal","Cat","Animal Cat","No output"],1,"class Animal {\n  void sound() { System.out.println(\"Animal\"); }\n}\nclass Cat extends Animal {\n  @Override\n  void sound() { System.out.println(\"Cat\"); }\n}\npublic class Main {\n  public static void main(String[] args) {\n    Animal a = new Cat();\n    a.sound();\n  }\n}"],
+["CODE ANALYSIS: Which TWO statements are true about this code?",["The field remains at its default value of 0.","The negative value is rejected by the condition.","The field becomes -5.","The getter cannot be called."],[0,1],"class Person {\n  private int age;\n  public void setAge(int age) {\n    if (age >= 0) this.age = age;\n  }\n  public int getAge() { return age; }\n}\npublic class Main {\n  public static void main(String[] args) {\n    Person p = new Person();\n    p.setAge(-5);\n    System.out.println(p.getAge());\n  }\n}"],
+["CODE ANALYSIS: What is printed?",["Vehicle moves","Car moves","Vehicle Car","No output"],1,"class Vehicle {\n  void move() { System.out.println(\"Vehicle moves\"); }\n}\nclass Car extends Vehicle {\n  @Override\n  void move() { System.out.println(\"Car moves\"); }\n}\npublic class Main {\n  public static void main(String[] args) {\n    Vehicle v = new Car();\n    v.move();\n  }\n}"],
+["CODE ANALYSIS: What is the output?",["Shape then Shape","Circle then Square","Square then Circle","Circle only"],1,"class Shape {\n  void draw() { System.out.println(\"Shape\"); }\n}\nclass Circle extends Shape {\n  @Override\n  void draw() { System.out.println(\"Circle\"); }\n}\nclass Square extends Shape {\n  @Override\n  void draw() { System.out.println(\"Square\"); }\n}\npublic class Main {\n  public static void main(String[] args) {\n    Shape s1 = new Circle();\n    Shape s2 = new Square();\n    s1.draw();\n    s2.draw();\n  }\n}"]
+];
+const $=id=>document.getElementById(id);
+const root=$('qs');let done=false;
+Q.forEach((q,i)=>{
+  if(i%10==0){const h=document.createElement('h2');h.textContent=P[i/10];root.appendChild(h)}
+  const multi=Array.isArray(q[2]),d=document.createElement('div');d.className='q';d.id='q'+i;
+  const t=document.createElement('div');t.className='qt';t.textContent=(i+1)+'. '+q[0];d.appendChild(t);
+  if(multi){const h=document.createElement('div');h.className='hint';h.textContent='Select all that apply';d.appendChild(h)}
+  if(q[3]){const p=document.createElement('pre');p.textContent=q[3];d.appendChild(p)}
+  q[1].forEach((o,j)=>{const l=document.createElement('label'),inp=document.createElement('input'),s=document.createElement('span');
+    inp.type=multi?'checkbox':'radio';inp.name='r'+i;inp.value=j;inp.onchange=prog;s.textContent=o;l.append(inp,s);d.appendChild(l)});
+  root.appendChild(d)});
+function sel(i){return [...document.querySelectorAll('input[name=r'+i+']:checked')].map(x=>+x.value)}
+function prog(){const n=Q.filter((_,i)=>sel(i).length).length;$('pt').textContent=n+' / 50 answered';$('pg').style.width=n*2+'%'}
+$('sub').onclick=()=>{
+  const un=Q.map((_,i)=>i).filter(i=>!sel(i).length);
+  if(un.length&&!confirm(un.length+' question(s) unanswered. Submit anyway?'))return;
+  let tot=0,pp=[0,0,0,0,0];done=true;
+  Q.forEach((q,i)=>{
+    const a=[].concat(q[2]),s=sel(i),ok=s.length==a.length&&s.every(x=>a.includes(x));
+    if(ok){tot++;pp[Math.floor(i/10)]++}
+    const d=$('q'+i);d.classList.add(ok?'ok':'no');
+    d.querySelectorAll('label').forEach((l,j)=>{l.querySelector('input').disabled=true;
+      if(a.includes(j))l.classList.add('c');else if(s.includes(j))l.classList.add('w')})});
+  const r=$('res');r.style.display='block';
+  const nm=$('nm').value.trim();
+  r.innerHTML='';const b=document.createElement('b');b.textContent=tot+' / 50';r.appendChild(b);
+  const p=document.createElement('div');p.textContent=(nm?nm+' · ':'')+Math.round(tot*2)+'% · '+pp.map((x,i)=>'Part '+(i+1)+': '+x+'/10').join(' · ');r.appendChild(p);
+  const n=document.createElement('div');n.className='sub';n.textContent='Green = correct answer, red = your wrong pick. Wrong items are outlined in red.';r.appendChild(n);
+  window.scrollTo({top:0,behavior:'smooth'})};
+$('rst').onclick=()=>{if(!confirm('Clear all answers?'))return;location.reload()};
+</script></body></html>
